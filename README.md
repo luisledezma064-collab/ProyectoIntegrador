@@ -1,0 +1,1 @@
+Este proyecto nace de la necesidad de optimizar los tiempos y recursos de la comunidad estudiantil. A través de una interfaz intuitiva, los usuarios pueden gestionar sus traslados y necesidades básicas de manera eficiente.
