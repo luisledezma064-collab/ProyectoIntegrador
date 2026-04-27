@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fondo {
+    background-image: url(fonde2.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-width: 1100px; 
+}
+
+
+
+.c1 {
+    background-color: rgb(214, 207, 207); 
+    width: 1000px; 
+    height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.3);
+    overflow: hidden; 
+    
+}
+
+
+.linea {
+    width: 4px;
+    height: 100%;
+    background-color: black;
+    position: absolute;
+    left: 500px; /* Justo a la mitad de los 1000px de la caja */
+}
+
+/* TEXTOS LADO DERECHO: Posicionados respecto a la CAJA, no a la ventana */
+.h2 {
+    position: absolute;
+    top: 18px;
+    left: 105px; /* Un poco a la derecha de la línea */
+    font-family: Impact, sans-serif;
+    font-size: 60px;
+    letter-spacing: 7px;
+    color: rgb(255, 255, 255);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.h3 {
+    position: absolute;
+    top: 100px;
+    left: 103px;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+/* LADO IZQUIERDO (LOGIN) */
+.user {
+    position: absolute;
+    top: 50px;
+    left: 220px;
+    width: 60px;
+}
+
+.login-section {
+    position: absolute;
+    left: 0;
+    width: 500px; /* Ocupa la mitad izquierda */
+    top: 150px;
+    text-align: center;
+    padding: 20px;
+}
+
+.input-group {
+    margin: 20px 0;
+}
+
+
+/* Efecto de Cristal para la caja principal */
+.c1 {
+    background: rgba(255, 255, 255, 0.1); /* Transparente */
+    backdrop-filter: blur(15px);          /* Desenfoque de fondo */
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 1000px; 
+    height: 640px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.5);
+}
+
+/* Campos de texto modernos */
+.input-group {
+    position: relative;
+    margin: 5px auto;
+    width: 80%;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 15px 10px;
+    background: rgba(255, 255, 255, 0.2); /* Fondo sutil */
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    color: #000;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+/* Efecto al dar click: El borde inferior se ilumina */
+.barra-brillo {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #000; /* O el color de tu marca */
+    transition: 0.4s ease;
+}
+
+.input-group input:focus ~ .barra-brillo {
+    width: 100%;
+}
+
+/* Botón con efecto de elevación */
+.btn-moderno {
+    background: #000;
+    color: #fff;
+    padding: 15px 40px;
+    border: none;
+    border-radius: 50px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-moderno:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    background: #333;
+}
+
+/* Icono de ojo para contraseña */
+.btn-ver {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: 0.6;
+}
+
+.redes-sociales {
+    margin-top: 25px; /* Espacio justo debajo del botón */
+    text-align: center;
+}
+
+.redes-sociales p {
+    font-size: 13px; /* Texto pequeño y elegante */
+    margin-bottom: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    
+}
+
+.iconos-redes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px; /* Espacio entre ellos */
+    position: absolute;
+    top: 339px;
+    left: 180px;
+}
+
+/* EL TAMAÑO IDEAL */
+.icono-link img, .icono-link i {
+    
+    width: 32px;  /* Tamaño balanceado */
+    height: 32px;
+    font-size: 32px; /* Si usas iconos de fuente */
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 100px;
+    
+}
+
+/* Efecto Hover: Que crezca un poquito sin mover el resto */
+.icono-link:hover img, .icono-link:hover i {
+    transform: scale(1.15); 
+    filter: drop-shadow(0px 0px 8px rgba(255,255,255,0.5));
+}
+
+.perro{
+   position: absolute;
+    top: -85px;
+    left: 502px;
+    width: 499px;
+}
+
+.c2{
+    background: #000;
+    width: 500px; 
+    height: 1215px;
+    position: absolute;
+    top: -120px;
+    left: 750px;
+    transform: translate(-50%, -50%);
+   border-top-right-radius: 10px;
+    
+}
+
+.br{
+     
+    font-size: 18px;
+    position: absolute;
+    top: 280px;
+    left: 135px;
+    color: #fff;
+}

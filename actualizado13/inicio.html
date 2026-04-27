@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTranzit - Inicio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="fondo">
+
+<div class="c1">
+    <div class="linea"></div>
+    <h1 class="h2">UTranzit</h1>
+    <h2 class="h3">CREA TU CUENTA Y EMPIEZA TU VIAJE</h2>
+
+    <section class="login-section">
+        <div class="c2"></div>
+        <img class="perro" src="perro.jpg">
+
+        <form id="register-form" class="formulario">
+            <div class="input-group">
+                <input type="text" name="usuario" required placeholder=" ">
+                <label class="label-flotante">Nombre de Usuario</label>
+                <span class="barra-brillo"></span>
+            </div>
+
+            <div class="input-group">
+                <input type="email" 
+                       name="correo"
+                       pattern=".+@virtual\.utsc\.edu\.mx" 
+                       title="Solo se permiten correos con dominio @virtual.utsc.edu.mx"
+                       required 
+                       placeholder=" ">
+                <label class="label-flotante">Correo Institucional</label>
+                <span class="barra-brillo"></span>
+            </div>
+
+            <div class="input-group">
+                <input type="password" 
+                       id="contrasena" 
+                       name="contrasena" 
+                       minlength="8"
+                       title="La contraseña debe tener al menos 8 caracteres"
+                       required 
+                       placeholder=" ">
+                <label class="label-flotante">Contraseña (min. 8 caracteres)</label>
+                <button type="button" class="btn-ver" onclick="mostrarContrasena()">👁</button>
+                <span class="barra-brillo"></span>
+            </div>
+
+            <button type="submit" class="btn-moderno"><span>CREAR CUENTA</span></button><br><br>
+
+            <div class="br">si ya tienes cuenta ingresa aqui <br></div><br>
+            <a href="inicio_seccion.php"><button type="button" class="btn-moderno"><span>INICIO SESION</span></button></a>
+            <br>
+            <a href="registro_conductor.php"><br><button type="button" class="btn-moderno"><span>CREAR CUENTA COMO CONDUCTOR</span></button></a>
+        </form>
+
+        <div class="redes-sociales">
+            <div class="iconos-redes">
+                <a href="https://www.facebook.com/UTSCNL?locale=es_LA" class="icono-link"><img src="fa.webp" alt="Facebook"></a>
+                <a href="https://www.instagram.com/utsantacatarina/" class="icono-link"><img src="ig.png" alt="Instagram"></a>
+                <a href="https://www.tiktok.com/@correcaminosutsc" class="icono-link"><img src="tt.png" alt="TikTok"></a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="notification" style="
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1a3d2e;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: none;
+    z-index: 1000;
+    font-family: sans-serif;
+"></div>
+
+<script>
+function mostrarContrasena() {
+    var input = document.getElementById("contrasena");
+    input.type = (input.type === "password") ? "text" : "password";
+}
+
+function showNotification(message, success=true){
+    const notif = document.getElementById("notification");
+    notif.innerText = message;
+    notif.style.background = success ? "#1a3d2e" : "#e53935";
+    notif.style.display = "block";
+    setTimeout(()=>{ notif.style.display = "none"; }, 3000);
+}
+
+document.getElementById("register-form").addEventListener("submit", async (e)=>{
+    e.preventDefault();
+    
+    // Validación extra por JS por si acaso
+    const pass = document.getElementById("contrasena").value;
+    if(pass.length < 8) {
+        showNotification("La contraseña es demasiado corta", false);
+        return;
+    }
+
+    const formData = new FormData(e.target);
+    const response = await fetch("crear_cuenta.php", { method:"POST", body: formData });
+    const text = await response.text();
+
+    if(text.trim() === "ok"){
+        showNotification("Cuenta creada con éxito ✅", true);
+        e.target.reset();
+        setTimeout(()=>{ window.location.href = "pantalla1.html"; }, 1500);
+    } else {
+        showNotification(text, false);
+    }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,208 @@
+.avisos-container {
+    padding: 20px;
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    color: white;
+}
+
+.aviso-card {
+    background: #2d2d2d;
+    border-left: 5px solid #00FF41; /* Verde UTranzit */
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.aviso-card.urgente {
+    border-left: 5px solid #ff4b4b; /* Rojo para alertas críticas */
+}
+
+.aviso-card:hover {
+    transform: scale(1.02);
+}
+
+.tag {
+    background: #00FF41;
+    color: black;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.tag.info {
+    background: #3498db;
+    color: white;
+}
+
+.fecha {
+    float: right;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.aviso-header a:hover {
+    color: #ff1a1a !important;
+    transform: scale(1.1);
+    transition: 0.2s;
+}
+/* Contenedor principal de la parte superior */
+.admin-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    background: #1e1e1e; /* Un gris un poco más claro que el fondo */
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    border: 1px solid #333;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.admin-toolbar h3 {
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+/* Formularios en línea */
+.inline-form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.inline-form input, .inline-form select, .inline-form textarea {
+    background: #2d2d2d;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    outline: none;
+}
+
+.inline-form textarea {
+    height: 38px; /* Para que coincida con el input */
+    resize: none;
+}
+
+/* Colores de los botones */
+.btn-publicar {
+    background: #28a745; /* Verde */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.btn-buscar {
+    background: #007bff; /* Azul */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-publicar:hover, .btn-buscar:hover {
+    filter: brightness(1.2);
+    transition: 0.3s;
+}
+/* Fondo general inspirado en la imagen de UTSC */
+body {
+    background: linear-gradient(135deg, #0a0f0a 0%, #050505 100%);
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+}
+
+/* Estilo de la barra superior */
+.utsc-header {
+    background: rgba(0, 50, 20, 0.4); /* Verde muy oscuro translúcido */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    margin: 20px auto;
+    width: 90%;
+    padding: 10px 30px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-text {
+    color: #2ecc71; /* Verde brillante UTSC */
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* Botón "Volver al Inicio" tipo píldora */
+
+/* --- Estilos para el Header (Avisos) --- */
+.utsc-header {
+    background: rgba(255, 255, 255, 0.05); /* Fondo oscuro sutil */
+    backdrop-filter: blur(10px); /* Efecto esmerilado */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    margin: 20px auto;
+    width: 90%;
+    padding: 10px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+}
+
+.header-contenedor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-utsc {
+    color: #2ecc71; /* Verde UTSC */
+    font-weight: bold;
+    font-size: 1.6rem;
+    font-family: 'Segoe UI', sans-serif;
+    letter-spacing: 1px;
+}
+
+/* --- ESTILO MODERNO PARA EL BOTÓN 'VOLVER' --- */
+.btn-volver {
+    all: unset; /* Resetea estilos por defecto */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre icono y texto */
+    
+    /* Colores y Fondo */
+    background: #2ecc71; /* Verde principal */
+    color: #ffffff;
+    
+    /* Tamaño y Forma */
+    padding: 10px 24px;
+    border-radius: 50px; /* Bordes redondeados */
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    
+    /* Efectos */
+    transition: all 0.3s ease; /* Animación suave */
+    box-shadow: 0 2px 8px rgba(46, 204, 113, 0.3);
+}
+
+/* Efecto al pasar el mouse (Hover) */
+.btn-volver:hover {
+    background: #27ae60; /* Verde más oscuro */
+    box-shadow: 0 4px 12px rgba(46, 204, 113, 0.5);
+    transform: translateY(-2px); /* Se eleva un poco */
+}
+
+/* Efecto al hacer clic */
+.btn-volver:active {
+    transform: translateY(1px); /* Se hunde un poco */
+}

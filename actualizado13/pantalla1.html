@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UTranzit - Ruta UT</title>
+    <link rel="stylesheet" href="style3.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body class="fondo-viaje">
+
+    <header class="barra-superior">
+        <div class="contenedor-navegacion">
+            <div class="logo-seccion">
+                <span class="txt-logo">UTranzit</span>
+            </div>
+
+            <nav class="tabs-modernas">
+                <button class="tab-btn activo" onclick="window.location.href='ruta.html'">RUTA A LA UT</button>
+                <button class="tab-btn" onclick="window.location.href='metodo_pago.html'">METODOS DE PAGO</button>
+                <button class="tab-btn" onclick="window.location.href='avisos.php'">AVISOS</button>
+                <button class="tab-btn" onclick="window.location.href='instalaciones.html'">INSTALACIONES</button>
+            </nav>
+
+            <div class="perfil-seccion">
+                <div class="info-usuario">
+                    <span class="nombre-usuario"></span>
+                    <img src="perfil_ejemplo.jpg" alt="Perfil" class="img-perfil-mini" id="fotoPerfilMini" onclick="document.getElementById('inputFoto').click();" style="cursor: pointer;">
+                    <input type="file" id="inputFoto" style="display: none;" accept="image/*" onchange="actualizarFoto(this)">
+                </div>
+                <div class="nav-buttons">
+                    <button onclick="confirmarSalida()" class="btn-nav btn-logout">✕ Cerrar Sesión</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="c4"></div>
+    <h3 style="text-align: center; color: white; margin-top: 20px;">Ruta a la UT</h3>
+
+    <div class="main-layout">
+        <div id="map"></div>
+        
+        <section class="contenedor-busqueda">
+            <div class="c1"></div> 
+            <h1 class="txt">Solicita tu transporte universitario</h1>
+            
+            <form id="form-transporte">
+                <div class="input-ruta">
+                    <span class="icon">📍</span>
+                    <div class="campo">
+                        <label>Origen</label>
+                        <div style="display: flex; gap: 5px;">
+                            <input type="text" name="origen" id="origen-input" placeholder="Mi ubicación actual" required>
+                            <button type="button" onclick="encontrarParadaCercana()" style="cursor:pointer; border:none; background:none; font-size:20px;">🎯</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="linea-conexion"></div>
+
+                <div class="input-ruta">
+                    <span class="icon">🏁</span>
+                    <div class="campo">
+                        <label>Destino</label>
+                        <input type="text" name="destino" value="UT Santa Catarina" readonly style="background-color: #f0f0f0; color: #666; cursor: not-allowed;">
+                    </div>
+                </div>
+
+                <div class="input-ruta" style="margin-top: 15px;">
+                    <span class="icon">👥</span>
+                    <div class="campo">
+                        <label>¿Cuántos viajan?</label>
+                        <select id="pasajeros" style="width: 100%; padding: 8px; border-radius: 4px; border: 1px solid #ccc;" onchange="actualizarCalculoSiHayDistancia()">
+                            <option value="1">Solo yo (1)</option>
+                            <option value="2">2 personas</option>
+                            <option value="3">3 personas</option>
+                            <option value="4">4 personas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="info-pago" style="display:none; margin-top: 15px; padding: 10px; background: #e7f3ff; border-radius: 8px; text-align: center; color: #333;">
+                    <p style="margin: 5px 0; font-size: 0.85rem;">Distancia: <strong id="km-texto">0</strong> km</p>
+                    <p style="margin: 5px 0; font-size: 0.9rem;">Costo total: <strong id="total-viaje"></strong></p>
+                    <p style="margin: 5px 0; color: #14550c;"><strong>Cada uno paga: <span id="cuota-persona"></span></strong></p>
+                </div>
+
+                <button type="button" class="btn-buscar" onclick="pedirTransporte()" style="margin-top: 20px;">
+                    PEDIR TRANSPORTE
+                </button>
+            </form>
+        </section>
+    </div>
+
+    <h1 class="titulo-seccion">NOTICIAS Y EVENTOS</h1>
+
+    <div class="contenedor-noticias-grid">
+        <div class="slider-contenedor">
+            <div class="slider-frame">
+                <div class="slides" id="slides1">
+                    <div class="slide"><img src="bandera.jpg"></div>
+                    <div class="slide"><img src="2fe.jpg"></div>
+                    <div class="slide"><img src="mili.jpg"></div>
+                </div>
+                <button type="button" class="flecha anterior" onclick="moverSlide('slides1', -1)">&#10094;</button>
+                <button type="button" class="flecha siguiente" onclick="moverSlide('slides1', 1)">&#10095;</button>
+            </div>
+        </div>
+    
+        <div class="slider-contenedor">
+            <div class="slider-frame">
+                <div class="slides" id="slides2">
+                    <div class="slide"><img src="utsc2.jpg"></div>
+                    <div class="slide"><img src="2.jpg"></div>
+                    <div class="slide"><img src="utsc2.jpg"></div>
+                </div>
+                <button type="button" class="flecha anterior" onclick="moverSlide('slides2', -1)">&#10094;</button>
+                <button type="button" class="flecha siguiente" onclick="moverSlide('slides2', 1)">&#10095;</button>
+            </div>
+        </div>
+    
+        <div class="slider-contenedor">
+            <div class="slider-frame">
+                <div class="slides" id="slides3">
+                    <div class="slide"><img src="pasantias2.jpg"></div>
+                    <div class="slide"><img src="te.png"></div>
+                    <div class="slide"><img src="pa1.jpg"></div>
+                </div>
+                <button type="button" class="flecha anterior" onclick="moverSlide('slides3', -1)">&#10094;</button>
+                <button type="button" class="flecha siguiente" onclick="moverSlide('slides3', 1)">&#10095;</button>
+            </div>
+        </div>
+    
+        <div class="slider-contenedor">
+            <div class="slider-frame">
+                <div class="slides" id="slides4">
+                    <div class="slide"><img src="noticia1.jpg"></div>
+                    <div class="slide"><img src="noticia2.jpg"></div>
+                    <div class="slide"><img src="noticia3.jpg"></div>
+                </div>
+                <button type="button" class="flecha anterior" onclick="moverSlide('slides4', -1)">&#10094;</button>
+                <button type="button" class="flecha siguiente" onclick="moverSlide('slides4', 1)">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="panel-viaje" class="panel-viaje" style="display:none;">
+        <h3> Tu viaje</h3>
+        <div id="info-viaje">
+            <p>Buscando conductor...</p>
+        </div>
+    </div>
+
+    <script>
+        // --- VARIABLES GLOBALES ---
+        var distanciaRealCalculada = 0;
+        var coordsDestino = [25.692332,-100.5144315];
+        var paradaSeleccionada = null;
+        const indices = { slides1: 0, slides2: 0, slides3: 0, slides4: 0 };
+
+        // --- MAPA ---
+        var surOeste = L.latLng(23.1, -101.3), norteEste = L.latLng(27.8, -98.3);
+        var limitesNuevoLeon = L.latLngBounds(surOeste, norteEste);
+
+        var map = L.map('map', {
+            maxBounds: limitesNuevoLeon,
+            maxBoundsViscosity: 1.0,
+            minZoom: 8
+        }).setView([25.6816, -100.4636], 13);
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap'
+        }).addTo(map);
+
+        var paradas = [
+            { nombre: "Parada 1: Soriana La Puerta", coords: [25.7989149,-100.3426067] },
+            { nombre: "Parada 2: Plaza Principal", coords: [25.6732, -100.4645] },
+            { nombre: "Parada 3: Paseo Santa Catarina", coords: [25.6845, -100.4420] },
+            { nombre: "Parada 4: S-Mart Garcia", coords: [25.7861572,-100.5805212] },
+            { nombre: "Parada 5", coords: [25.7819218,-100.5767251] },
+            { nombre: "Parada 6", coords: [25.773127,-100.562433] },
+            { nombre: "Parada 7", coords: [25.7581024,-100.5385525] },
+            { nombre: "Parada 1: Soriana La Puerta", coords: [25.7989149, -100.3426067] },
+    { nombre: "Parada 2: Plaza Principal Santa Catarina", coords: [25.6732, -100.4645] },
+    { nombre: "Parada 3: Paseo Santa Catarina", coords: [25.6845, -100.4420] },
+    { nombre: "Parada 4: S-Mart García", coords: [25.7861572, -100.5805212] },
+    { nombre: "Parada 5: HEB Lomas de García", coords: [25.7819218, -100.5767251] },
+    { nombre: "Parada 6: Hospital de García", coords: [25.773127, -100.562433] },
+    { nombre: "Parada 7: Entronque García", coords: [25.7581024, -100.5385525] },
+    { nombre: "Parada 8: La Fama (Santa Catarina)", coords: [25.6745, -100.4145] },
+    { nombre: "Parada 9: UT Santa Catarina", coords: [25.6881, -100.5114] },
+    { nombre: "Parada 10: San Pedro 400 (Clouthier)", coords: [25.6702, -100.4035] },
+    { nombre: "Parada 11: Vasconcelos y Corregidora", coords: [25.6608, -100.4011] },
+    { nombre: "Parada 12: UDEM (San Pedro)", coords: [25.6616, -100.4205] },
+    { nombre: "Parada 13: Plaza Nativa", coords: [25.6644, -100.4132] },
+    { nombre: "Parada 14: Sendero Lincoln (García)", coords: [25.7952, -100.4523] },
+    { nombre: "Parada 15: HEB La Puerta", coords: [25.6802, -100.4705] },
+    { nombre: "Parada 16: Akra (Zona Industrial)", coords: [25.6748, -100.4285] },
+    { nombre: "Parada 17: Soriana Santa Catarina (Díaz Ordaz)", coords: [25.6725, -100.4042] },
+    { nombre: "Parada 18: Movimiento Obrero", coords: [25.6698, -100.3956] },
+    { nombre: "Parada 19: Perimetral Norte y 15 de Mayo", coords: [25.6985, -100.4682] },
+    { nombre: "Parada 20: Bodega Aurrera (Los Viñedos)", coords: [25.7124, -100.5255] },
+
+    // --- CONTINUACIÓN GARCÍA ---
+    { nombre: "Parada 21: Plaza Dominios", coords: [25.7685, -100.5421] },
+    { nombre: "Parada 22: Smart Lincoln", coords: [25.7924, -100.4782] },
+    { nombre: "Parada 23: Valle de Lincoln", coords: [25.8055, -100.5123] },
+    { nombre: "Parada 24: Casco de García (Av. Juárez)", coords: [25.8152, -100.5925] },
+    { nombre: "Parada 25: Mitras Poniente (Sector Jordán)", coords: [25.8012, -100.4658] },
+    
+        ];
+
+        // Marcar paradas y habilitar clic manual
+        paradas.forEach(function(parada, index) {
+            var marker = L.circleMarker(parada.coords,{
+                color:'#ff5733', fillColor:'#ff5733', fillOpacity:0.8, radius:8
+            }).addTo(map);
+            marker.bindPopup(parada.nombre);
+            marker.on("click",function(){
+                document.getElementById("origen-input").value = parada.nombre;
+                paradaSeleccionada = index + 1;
+                // Al hacer clic manual también calculamos
+                distanciaRealCalculada = calcularDistancia(parada.coords[0], parada.coords[1], coordsDestino[0], coordsDestino[1]);
+                ejecutarCalculoPago();
+            });
+        });
+
+        // Icono Destino
+        L.marker(coordsDestino, {icon: L.icon({iconUrl: 'destino.png', iconSize: [40, 40]})}).addTo(map)
+            .bindPopup('<b>DESTINO FINAL: UT Santa Catarina</b>').openPopup();
+
+        // --- FUNCIONES DE CÁLCULO ---
+        function calcularDistancia(lat1, lon1, lat2, lon2) {
+            var R = 6371; 
+            var dLat = (lat2 - lat1) * Math.PI / 180;
+            var dLon = (lon2 - lon1) * Math.PI / 180;
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function ejecutarCalculoPago() {
+            const TARIFA_BASE = 10.00;
+            const PRECIO_POR_KM = 10.00;
+            const numPersonas = parseInt(document.getElementById('pasajeros').value);
+
+            if (distanciaRealCalculada > 0) {
+                const costoTrayecto = distanciaRealCalculada * PRECIO_POR_KM;
+                const totalGeneral = TARIFA_BASE + costoTrayecto;
+                const pagoPorPersona = totalGeneral / numPersonas;
+
+                document.getElementById('km-texto').innerText = distanciaRealCalculada.toFixed(2);
+                document.getElementById('total-viaje').innerText = `$${totalGeneral.toFixed(2)}`;
+                document.getElementById('cuota-persona').innerText = `$${pagoPorPersona.toFixed(2)}`;
+                document.getElementById('info-pago').style.display = 'block';
+            }
+        }
+
+        function actualizarCalculoSiHayDistancia() {
+            if (distanciaRealCalculada > 0) ejecutarCalculoPago();
+        }
+
+        function encontrarParadaCercana() {
+            if (!navigator.geolocation) { alert("Tu navegador no soporta geolocalización"); return; }
+
+            navigator.geolocation.getCurrentPosition(function(position) {
+                var userLat = position.coords.latitude;
+                var userLon = position.coords.longitude;
+                var paradaMasCercana = null;
+                var distanciaMinima = Infinity;
+
+                paradas.forEach(function(parada) {
+                    var d = calcularDistancia(userLat, userLon, parada.coords[0], parada.coords[1]);
+                    if (d < distanciaMinima) {
+                        distanciaMinima = d;
+                        paradaMasCercana = parada;
+                    }
+                });
+
+                if (paradaMasCercana) {
+                    document.getElementById('origen-input').value = paradaMasCercana.nombre;
+                    map.setView(paradaMasCercana.coords, 15);
+                    distanciaRealCalculada = calcularDistancia(paradaMasCercana.coords[0], paradaMasCercana.coords[1], coordsDestino[0], coordsDestino[1]);
+                    ejecutarCalculoPago();
+                    
+                    L.marker([userLat, userLon]).addTo(map).bindPopup("Tú estás aquí").openPopup();
+                    alert("Parada más cercana: " + paradaMasCercana.nombre + "\nDistancia a la UT: " + distanciaRealCalculada.toFixed(2) + " km");
+                }
+            }, function() { alert("No se pudo obtener tu ubicación."); });
+        }
+
+        function pedirTransporte(){
+            if(paradaSeleccionada == null){ alert("Selecciona una parada en el mapa"); return; }
+            fetch("pedir_transporte.php",{
+                method:"POST",
+                headers:{ "Content-Type":"application/x-www-form-urlencoded" },
+                body:"id_punto="+paradaSeleccionada
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById("panel-viaje").style.display = "block";
+                document.getElementById("info-viaje").innerHTML = "⏳ Buscando conductor...";
+                iniciarSeguimiento();
+            });
+        }
+
+        // --- OTROS SCRIPTS ---
+        function iniciarSeguimiento(){
+            setInterval(() => {
+                fetch("estado_viaje.php").then(res => res.text()).then(data => {
+                    document.getElementById("info-viaje").innerHTML = data;
+                });
+            }, 3000); 
+        }
+
+        function confirmarSalida() {
+            Swal.fire({
+                title: '¿Cerrar sesión?',
+                text: "Tendrás que ingresar tus credenciales nuevamente.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, salir',
+                cancelButtonText: 'Cancelar',
+                background: '#1e1e1e', color: '#fff'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    setTimeout(() => { localStorage.clear(); window.location.href = 'logout.php'; }, 1500); 
+                }
+            });
+        }
+
+        function moverSlide(id, direccion) {
+            const slider = document.getElementById(id);
+            const total = slider.querySelectorAll(".slide").length;
+            indices[id] += direccion;
+            if (indices[id] >= total) indices[id] = 0;
+            if (indices[id] < 0) indices[id] = total - 1;
+            slider.style.transform = `translateX(-${indices[id] * 100}%)`;
+        }
+
+        setInterval(() => {
+            moverSlide('slides1', 1); moverSlide('slides2', 1);
+            moverSlide('slides3', 1); moverSlide('slides4', 1);
+        }, 4000);
+
+        setInterval(() => {
+            fetch('consultar_notificaciones.php').then(res => res.json()).then(data => {
+                data.forEach(aviso => {
+                    const marca = `visto_${aviso.id_solicitud}_${aviso.estado}`;
+                    if(!localStorage.getItem(marca)) {
+                        Swal.fire({ title: 'Aviso', text: `Viaje con ${aviso.conductor}`, icon: 'success', background: '#1e1e1e', color: '#fff' });
+                        localStorage.setItem(marca, 'true');
+                    }
+                });
+            });
+        }, 5000);
+
+        function actualizarFoto(input) {
+            if (input.files && input.files[0]) {
+                const formData = new FormData();
+                formData.append('foto', input.files[0]);
+                fetch('subir_foto.php', { method: 'POST', body: formData })
+                .then(res => res.text()).then(ruta => {
+                    if (ruta.includes("uploads/")) document.getElementById('fotoPerfilMini').src = ruta;
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Paleta Verde UTSC */
+        :root {
+            --utsc-principal: #1b5e20;
+            --utsc-oscuro: #144618;
+            --utsc-claro: #e8f5e9;
+        }
+        .bg-utsc { background-color: var(--utsc-principal); }
+        .text-utsc { color: var(--utsc-principal); }
+        .border-utsc { border-color: var(--utsc-principal); }
+        .hover-utsc:hover { background-color: var(--utsc-oscuro); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans leading-relaxed">
+
+    <nav class="bg-utsc text-white shadow-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="relative flex items-center justify-center h-20">
+                
+                <div class="absolute left-0 flex items-center space-x-3">
+                    <div class="bg-white p-2 rounded-lg">
+                        <i class="fas fa-route text-utsc text-2xl"></i>
+                    </div>
+                    <span class="font-black text-2xl tracking-tighter uppercase hidden sm:block">UTranzit</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-8 text-sm font-bold uppercase">
+                    <a href="pantalla1.html" class="hover:text-green-200 transition-colors py-2 border-b-2 border-transparent hover:border-green-200">RUTA A LA UT</a>
+                    <a href="metodo_pago.html" class="hover:text-green-200 transition-colors py-2 border-b-2 border-transparent hover:border-green-200">Pagos</a>
+                    <a href="avisos.php" class="hover:text-green-200 transition-colors py-2 border-b-2 border-transparent hover:border-green-200">AVISOS</a>
+                    <a href="instalaciones.html" class="border-b-2 border-white py-2">Nosotros</a>
+                </div>
+
+                <div class="absolute right-0">
+                    </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="py-20 bg-white border-b border-gray-100">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <span class="text-utsc font-bold tracking-widest uppercase text-sm">Innovación Estudiantil</span>
+            <h1 class="text-5xl md:text-6xl font-black mt-4 mb-8 text-gray-900">Nuestra Identidad</h1>
+            <p class="text-xl text-gray-500 max-w-3xl mx-auto">
+                UTranzit nace como un proyecto de ingeniería de software en la **UTSC**, buscando solucionar el caos vial y la inseguridad en los traslados de la comunidad universitaria.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-6 py-16">
+        
+        <div class="grid md:grid-cols-2 gap-16 mb-24 items-center">
+            <div class="space-y-6">
+                <h2 class="text-3xl font-bold border-l-8 border-utsc pl-4">¿Qué es UTranzit?</h2>
+                <p class="text-gray-600">
+                    Es una plataforma de movilidad colaborativa diseñada específicamente para la comunidad universitaria de Santa Catarina. Nuestro sistema permite conectar a estudiantes que cuentan con vehículo propio con aquellos que necesitan un traslado confiable.
+                </p>
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="flex items-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                        <i class="fas fa-check-circle text-utsc mr-3"></i>
+                        <span class="text-sm">Optimización de espacios en estacionamientos.</span>
+                    </div>
+                    <div class="flex items-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                        <i class="fas fa-check-circle text-utsc mr-3"></i>
+                        <span class="text-sm">Reducción de gastos de transporte hasta en un 60%.</span>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-utsc p-10 rounded-[3rem] text-white shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+                <h3 class="text-2xl font-bold mb-4">Misión UTSC</h3>
+                <p class="text-green-50 opacity-90 italic">
+                    "Integrar la tecnología de vanguardia con la responsabilidad social para crear un campus conectado, donde ningún estudiante pierda una clase por falta de transporte."
+                </p>
+            </div>
+        </div>
+
+        <section class="mb-24">
+            <h2 class="text-3xl font-bold text-center mb-12 uppercase tracking-tighter">Plan de Mejora Continua</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-50 hover:-translate-y-2 transition-all">
+                    <div class="w-12 h-12 bg-utsc text-white rounded-full flex items-center justify-center mb-6 font-bold">01</div>
+                    <h4 class="font-bold text-xl mb-4 text-utsc">Seguridad Biométrica</h4>
+                    <p class="text-sm text-gray-500">
+                        Planeamos integrar la API de reconocimiento facial para asegurar que el conductor y el pasajero coincidan exactamente con el perfil de la base de datos de la UTSC.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-50 hover:-translate-y-2 transition-all">
+                    <div class="w-12 h-12 bg-utsc text-white rounded-full flex items-center justify-center mb-6 font-bold">02</div>
+                    <h4 class="font-bold text-xl mb-4 text-utsc">Comunidad Verificada</h4>
+                    <p class="text-sm text-gray-500">
+                        Acceso exclusivo con matrícula institucional para máxima confianza.
+                    </p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-gray-50 hover:-translate-y-2 transition-all">
+                    <div class="w-12 h-12 bg-utsc text-white rounded-full flex items-center justify-center mb-6 font-bold">03</div>
+                    <h4 class="font-bold text-xl mb-4 text-utsc">Big Data Logístico</h4>
+                    <p class="text-sm text-gray-500">
+                        Análisis masivo de datos para sugerir nuevas rutas oficiales a la universidad basados en las zonas donde más viven los alumnos.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-8 md:mb-0 text-center md:text-left">
+                <h2 class="text-2xl font-bold text-white mb-2 uppercase tracking-widest">UTranzit</h2>
+                <p class="text-gray-400 text-sm italic">Proyecto oficial de Ingeniería de Software - 2026</p>
+            </div>
+            <div class="flex space-x-6 text-2xl">
+                <a href="#" class="hover:text-utsc transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-utsc transition"><i class="fab fa-github"></i></a>
+                <a href="#" class="hover:text-utsc transition"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+        <div class="text-center mt-12 text-xs text-gray-500 border-t border-gray-800 pt-8">
+            © 2026 Universidad Tecnológica de Santa Catarina. Todos los derechos reservados.
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+body.fondo-viaje {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff; /* Fondo muy oscuro */
+    color: white;
+}
+
+/* --- Layout Principal --- */
+.main-layout {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 30px;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Mapa --- */
+#map {
+    flex: 1; 
+    min-width: 350px; 
+    height: 500px; /* Alto fijo del mapa */
+    border-radius: 20px;
+    border: 2px solid #07f757;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    z-index: 1; 
+}
+
+/* --- Formulario (El cuadro oscuro con banner verde) --- */
+.contenedor-busqueda {
+    flex: 0 1 400px; /* Ancho fijo en PC */
+    background: #1a1a1a; /* Fondo oscuro sólido */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    position: relative; /* Clave para el banner absoluto */
+    overflow: hidden; /* Corta el banner para que no se salga */
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    padding: 0; /* Quitamos padding aquí para el banner */
+}
+
+/* El banner verde superior (AHORA FIJO) */
+.c1 {
+    background: #0a4b08; /* Verde oscuro */
+    width: 100%;
+    height: 60px; /* Alto del banner */
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Por debajo del texto */
+}
+
+/* Texto del banner */
+.txt {
+    position: relative;
+    z-index: 2; /* Por encima del banner verde */
+    color: white;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    padding: 20px 0; /* Padding para centrar verticalmente */
+}
+
+/* Formulario interno */
+.contenedor-busqueda form {
+    padding: 20px 30px 30px; /* Padding solo para el contenido */
+    position: relative;
+    z-index: 2; /* Por encima del banner */
+    margin-top: 60px; /* Espacio para que el banner no lo tape */
+}
+
+/* ... Estilos de inputs y botones permanecen igual ... */
+.input-ruta { display: flex; align-items: center; background: rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px; margin: 10px 0; position: relative; z-index: 1; }
+.input-ruta .campo { display: flex; flex-direction: column; margin-left: 10px; width: 100%; }
+.input-ruta label { font-size: 10px; color: #07f757; text-transform: uppercase; font-weight: bold; }
+.input-ruta input { background: transparent; border: none; color: white; outline: none; font-size: 15px; }
+.linea-conexion { width: 2px; height: 15px; background: #07f757; margin-left: 25px; }
+.btn-buscar { width: 100%; background: #07f757; color: #000; border: none; padding: 18px; border-radius: 15px; margin-top: 20px; font-weight: bold; font-size: 18px; cursor: pointer; transition: 0.3s; }
+.btn-buscar:hover { background: #05c946; transform: scale(1.02); }
+
+/* --- Sección de Noticias (EL CAMBIO CLAVE) --- */
+/* Contenedor principal */
+.slider-contenedor {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; /* Alinea el contenido a la IZQUIERDA */
+    margin: 20px 0;
+}
+
+/* El marco del slider (CUADRADO Y CHICO) */
+.slider-frame {
+    width: 365px; 
+    height: 400px;/* Tamaño reducido */
+    aspect-ratio: 1 / 1; /* Proporción 1:1 para que sea un cuadrado perfecto */
+    
+    overflow: hidden;
+    border-radius: 20px;
+    border: 3px solid #07f757; /* Borde verde de la imagen */
+    position: relative;
+    margin-left: 0; /* Asegura que esté pegado al borde izquierdo */
+}
+
+.slides {
+    display: flex;
+    height: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+    min-width: 100%;
+    height: 100%;
+}
+
+/* Ajuste de imagen */
+.slide img {
+    width: 364px;
+    height: 100%;
+    object-fit: cover; /* Llena el cuadrado sin deformar la foto */
+    display: block;
+}
+
+/* Título alineado a la izquierda */
+.titulo-seccion {
+    text-align: left;
+    font-size: 22px;
+    color: white;
+    margin-bottom: 10px;
+    padding-left: 0;
+}
+
+/* Flechas de navegación */
+.flecha { 
+    position: absolute; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    background: rgba(0, 0, 0, 0.5); 
+    color: white; 
+    border: none; 
+    padding: 8px; 
+    cursor: pointer; 
+    border-radius: 50%; 
+    z-index: 10; 
+}
+
+.anterior { left: 10px; }
+.siguiente { right: 10px; }
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .slider-frame {
+        width: 250px; /* Un poco más chico en celulares */
+        margin: 0 auto; /* Opcional: Centrarlo solo en móviles para que no se corte */
+    }
+    .titulo-seccion {
+        text-align: center;
+    }
+}
+
+.barra-superior {
+    background-color: #0a4b08; /* Fondo oscuro moderno */
+    border-bottom: 2px solid #07f757; /* Tu línea verde neón */
+    color: white;
+    font-family: Arial, sans-serif;
+    position: fixed; /* Mantiene la barra fija arriba */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que esté sobre el mapa */
+    box-shadow: 0 2px 10px rgba(7, 247, 87, 0.2);
+}
+
+.contenedor-navegacion {
+    display: flex;
+    justify-content: space-between; /* Logo | Pestañas | Perfil */
+    align-items: center;
+    padding: 10px 20px;
+    height: 60px; /* Altura fija */
+}
+
+/* Logo */
+.logo-seccion {
+    display: flex;
+    align-items: center;
+}
+
+.txt-logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+/* Pestañas Modernas (Inspirado en image_3.png) */
+.tabs-modernas {
+    display: flex;
+    gap: 0; /* Sin espacio entre ellas */
+    background: transparent;
+    border-radius: 8px; /* Redondeado general */
+    overflow: hidden; /* Corta los bordes rectos interiores */
+}
+
+.tab-btn {
+    background: #2a2a2a; /* Fondo oscuro de la pestaña */
+    color: #a0a0a0;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-right: 1px solid #1a1a1a; /* Separador oscuro */
+}
+
+
+.tab-btn.activo {
+    background: #ffffff; 
+    color: black;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.tab-btn:hover:not(.activo) {
+    background: #3a3a3a;
+    color: white;
+}
+
+/* Sección de Perfil */
+.perfil-seccion {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.info-usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nombre-usuario {
+    font-size: 14px;
+}
+
+.img-perfil-mini {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #07f757; /* Borde verde en el perfil */
+    object-fit: cover;
+}
+
+
+.btn-logout {
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.btn-logout:hover {
+    color: #ff4d4d; /* Rojo para cerrar sesión */
+    background: rgba(255, 77, 77, 0.1);
+}
+
+/* --- Ajuste de espaciado --- */
+.main-layout {
+    margin-top: 80px; /* Deja espacio para la barra superior fija */
+}
+
+/* Nuevo contenedor para ponerlos en fila */
+.contenedor-noticias-grid {
+    display: flex;
+    flex-wrap: wrap; /* Para que en móviles bajen y no se amontonen */
+    gap: 20px;       /* Espacio entre los sliders */
+    padding: 20px;
+    justify-content: flex-start;
+}
+
+.slider-contenedor {
+    margin: 0; /* Quitamos márgenes innecesarios */
+    width: auto;
+}
+
+.slider-frame {
+    width: 280px;  /* Reduje un poco el ancho para que quepan 4 bien en pantalla */
+    height: 310px; /* Ajuste proporcional */
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 20px;
+    border: 3px solid #07f757;
+    position: relative;
+}
+
+.slide img {
+    width: 280px; /* Debe coincidir con el ancho del frame */
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Título */
+.titulo-seccion {
+    padding-left: 20px;
+    margin-top: 40px;
+}
+
+/* --- Sección de Noticias (CORREGIDA) --- */
+.contenedor-noticias-grid {
+    display: flex;
+    flex-wrap: wrap;       /* Permite que bajen si no caben */
+    gap: 30px;             /* Espacio entre cuadros */
+    padding: 20px;
+    justify-content: center; /* ESTA ES LA CLAVE: Centra los cuadros en la fila */
+    align-items: center;    /* Centra verticalmente si tienen alturas distintas */
+    max-width: 1400px;      /* Opcional: para que no se estiren demasiado en pantallas gigantes */
+    margin: 0 auto;         /* Centra el contenedor completo respecto a la página */
+}
+
+.slider-contenedor {
+    display: flex;
+    justify-content: center; 
+    margin: 0; 
+}
+
+.slider-frame {
+    width: 280px; 
+    height: 310px;
+    border-radius: 20px;
+    border: 3px solid #07f757; /* Tu borde verde neón */
+    overflow: hidden;
+    position: relative;
+    /* Eliminamos margin-left: 0 para que no fuerce la posición */
+}
+
+.navbar {
+            background: #06220e; 
+            padding: 12px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            border: 1px solid #1a3a22;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .brand {
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.4rem;
+            letter-spacing: 1px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-nav {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .btn-nav:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #10b981;
+        }
+
+        .btn-logout {
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        .btn-logout:hover {
+            background: #ef4444;
+            border-color: #ef4444;
+            color: white;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Estilos para el Pop-up Principal */
+.swal-custom-popup {
+    background-color: #212121 !important; /* Color de fondo gris muy oscuro */
+    border-radius: 18px !important;       /* Bordes redondeados exactos */
+    padding: 2.5em !important;            /* Espaciado interno generoso */
+    box-shadow: 0 15px 40px rgba(0,0,0,0.6) !important; /* Sombra suave para dar profundidad */
+}
+
+/* Estilo para el Título */
+.swal-custom-title {
+    color: #ffffff !important;            /* Texto blanco */
+    font-weight: 600 !important;          /* Semibold */
+    font-size: 1.6rem !important;          /* Tamaño del título */
+    margin-top: 20px !important;         /* Espacio arriba del título */
+}
+
+/* Estilo para el Texto */
+.swal-custom-html {
+    color: #b0b0b0 !important;            /* Texto gris claro para el subtexto */
+    font-size: 1.1rem !important;          /* Tamaño del subtexto */
+    line-height: 1.4 !important;          /* Interlineado cómodo */
+}
+
+/* Estilo General de los Botones (Rounded) */
+.swal-custom-actions button {
+    border-radius: 8px !important;       /* Botones redondeados */
+    font-weight: 500 !important;          /* Peso de fuente */
+    padding: 12px 24px !important;       /* Espaciado de los botones */
+    border: none !important;              /* Sin bordes */
+    font-size: 1rem !important;           /* Tamaño de fuente del botón */
+}
+
+/* Botón 'Sí, salir' (Rojo) */
+.swal-custom-actions .swal2-confirm {
+    background-color: #ef4444 !important; /* Rojo intenso */
+}
+
+/* Botón 'Cancelar' (Azul) */
+.swal-custom-actions .swal2-cancel {
+    background-color: #3b82f6 !important; /* Azul intenso */
+}
+
+.swal-custom-popup {
+    background-color: #1e1e1e !important;
+    border-radius: 20px !important;
+    color: white !important;
+}
+.swal-confirm-btn {
+    background-color: #ef4444 !important; /* Rojo */
+    border-radius: 8px !important;
+    padding: 10px 24px !important;
+}
+.swal-cancel-btn {
+    background-color: #3b82f6 !important; /* Azul */
+    border-radius: 8px !important;
+    padding: 10px 24px !important;
+}
+
+.panel-viaje {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
+    z-index: 999;
+    animation: subir 0.3s ease;
+}
+
+@keyframes subir {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+

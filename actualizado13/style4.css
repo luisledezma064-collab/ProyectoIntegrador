@@ -1,0 +1,280 @@
+:root {
+    --ut-green: #1a3d2e;
+    --ut-border: #e0e0e0;
+}
+
+body {
+    background-color: #c7cac7;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.main-container {
+    width: 850px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.section-header { background: var(--ut-green); color: white; padding: 5px 25px; }
+
+.content-wrapper { display: grid; grid-template-columns: 1fr 1.2fr; gap: 20px; padding: 25px; }
+
+/* Estilo de los items de tarjeta */
+.card-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px;
+    border: 1px solid var(--ut-border);
+    border-radius: 8px;
+    margin-bottom: 10px;
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.delete-btn { background: #fee2e2; color: #ef4444; border: none; border-radius: 5px; cursor: pointer; padding: 5px 8px; }
+.delete-btn:hover { background: #fecaca; }
+
+/* Tabs */
+.toggle-container { display: flex; background: #f0f0f0; border-radius: 8px; margin-bottom: 20px; padding: 4px; }
+.toggle-btn { flex: 1; border: none; padding: 10px; border-radius: 6px; cursor: pointer; transition: 0.3s; }
+.toggle-btn.active { background: var(--ut-green); color: white; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+/* Inputs */
+input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+.input-with-icon { position: relative; margin-bottom: 15px; }
+.input-with-icon i { position: absolute; left: 10px; top: 12px; color: #888; }
+.input-with-icon input { padding-left: 35px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.save-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--ut-green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cash-instructions { text-align: center; padding: 20px; border: 2px dashed #ccc; border-radius: 10px; }
+
+.content-wrapper {
+    display: flex; /* Pone una columna al lado de la otra */
+    gap: 20px;
+}
+
+.saved-cards {
+    flex: 1; /* Ocupa el espacio de la izquierda */
+}
+
+#cards-list {
+    display: flex;
+    flex-direction: column; /* Las pone una debajo de otra */
+    gap: 10px;
+}
+
+.card-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.content-wrapper {
+    display: flex; /* Pone la lista a la izquierda y el formulario a la derecha */
+    gap: 30px;
+    padding: 20px;
+}
+
+.saved-cards {
+    flex: 1; /* Columna de la izquierda */
+    max-width: 400px;
+}
+
+#cards-list {
+    display: flex;
+    flex-direction: column; /* Tarjetas una debajo de otra */
+}
+
+.content-wrapper {
+    display: flex;
+    gap: 30px; /* Espacio entre la lista y el formulario */
+    padding: 20px;
+    align-items: flex-start;
+}
+
+.saved-cards {
+    flex: 1; /* Toma el espacio de la izquierda */
+    max-width: 45%;
+}
+
+.add-payment {
+    flex: 1; /* Toma el espacio de la derecha */
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* Contenedor principal para dividir la vista en dos columnas */
+.content-wrapper {
+    display: flex; /* Pone una columna al lado de la otra */
+    gap: 30px; /* Espacio entre la lista y el formulario */
+    padding: 25px; /* Margen interno */
+    align-items: flex-start; /* Alinea los elementos al inicio */
+}
+
+/* Columna izquierda: Sección de tarjetas guardadas */
+.saved-cards {
+    flex: 1; /* Ocupa el espacio disponible proporcionalmente */
+    max-width: 450px; /* Limita el ancho para que no se estire demasiado */
+}
+
+/* El div donde el JavaScript inyecta las tarjetas */
+#cards-list {
+    display: flex;
+    flex-direction: column; /* Las pone una debajo de otra */
+    gap: 15px; /* Espacio entre cada tarjeta individual */
+}
+
+/* Estilo de los items de tarjeta generados por JS */
+/* Aunque definimos estilos en línea en el JS, esto asegura que el hover funcione */
+.card-item:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* Sombra más fuerte al pasar el mouse */
+}
+
+/* BARRA SUPERIOR */
+
+.barra-superior{
+width:100%;
+height:70px;
+
+background:#0a4b08;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+padding:0 40px;
+
+position:fixed;
+top:0;
+left:0;
+
+z-index:1000;
+
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* LOGO */
+
+.logo{
+color:white;
+font-weight:bold;
+font-size:22px;
+}
+
+/* MENU CENTRAL */
+
+.menu-superior{
+display:flex;
+gap:10px;
+
+background:#2a2a2a;
+padding:5px;
+border-radius:10px;
+}
+
+.menu-superior button{
+
+background:transparent;
+border:none;
+
+color:#bbb;
+font-weight:bold;
+
+padding:10px 20px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+transition:0.25s;
+}
+
+/* BOTON ACTIVO */
+
+.menu-superior button.activo{
+background:white;
+color:black;
+}
+
+/* HOVER */
+
+.menu-superior button:hover{
+background:#444;
+color:white;
+}
+
+/* PERFIL */
+
+.perfil{
+color:white;
+border:2px solid #22c55e;
+border-radius:50%;
+width:40px;
+height:40px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:12px;
+}
+
+/* PARA QUE EL CONTENIDO NO QUEDE TAPADO */
+
+body{
+padding-top:80px;
+}
+.menu-superior button.activo{
+background:white;
+color:black;
+}
+/* NOTIFICACION BONITA */
+
+.toast{
+position: fixed;
+bottom: 30px;
+right: 30px;
+background: #1a3d2e;
+color: white;
+padding: 15px 25px;
+border-radius: 10px;
+font-size: 14px;
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+opacity: 0;
+transform: translateY(20px);
+transition: all 0.3s ease;
+z-index: 9999;
+}
+
+.toast.show{
+opacity: 1;
+transform: translateY(0);
+}
